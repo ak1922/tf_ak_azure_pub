@@ -1,8 +1,3 @@
-variable "keyvault_name" {
-  type        = string
-  description = "Name of Key Vault."
-}
-
 variable "sku_name" {
   type        = string
   description = "Name of Key Vault sku."
@@ -51,4 +46,9 @@ variable "default_action" {
 variable "ip_rules" {
   description = "A list of IPs allowd access through firewall."
   type        = list(string)
+}
+
+variable "enabled_for_template_deployment" {
+  type        = string
+  description = "Specifies if Key Vault is enabled for Resource Manager."
 }
