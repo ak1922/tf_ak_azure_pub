@@ -16,10 +16,10 @@ resource "azurerm_key_vault" "keyvault" {
   resource_group_name = data.azurerm_resource_group.resource_group.name
 
   network_acls {
-    default_action = var.default_action
-    bypass = var.bypass
-    ip_rules = var.ip_rules
-    virtual_network_subnet_ids = [ data.azurerm_subnet.servicesub.id ]
+    default_action             = var.default_action
+    bypass                     = var.bypass
+    ip_rules                   = var.ip_rules
+    virtual_network_subnet_ids = [data.azurerm_subnet.servicesub.id]
   }
 
   tags = local.project_tags
