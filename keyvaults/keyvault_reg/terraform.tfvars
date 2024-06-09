@@ -1,0 +1,11 @@
+sku_name                        = "standard"
+location                        = "eastus"
+soft_delete_retention_days      = 7
+purge_protection_enabled        = true
+enabled_for_disk_encryption     = true
+enable_rbac_authorization       = true
+enabled_for_deployment          = true
+bypass                          = "AzureServices"
+ip_rules                        = ["73.128.169.71"]
+default_action                  = "Deny"
+enabled_for_template_deployment = true
