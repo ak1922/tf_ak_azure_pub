@@ -8,7 +8,7 @@ data "azurerm_resource_group" "resource_group" {
 
 # Data source service subnet.
 data "azurerm_subnet" "servicesub" {
-  name                 = "atlas_vnet_service_subnet"
+  name                 = "tfakazurepub-vnet-pri-sub"
   resource_group_name  = data.azurerm_resource_group.resource_group.name
-  virtual_network_name = "data.azurerm_virtual_network.vnet.name"
+  virtual_network_name = "tfakazurepub-vnet"
 }
