@@ -9,7 +9,7 @@ variable "address_space" {
 }
 
 variable "subnets" {
-  description = "Public and private subnets for virtual network."
+  description = "Public and private subnets for virtual network"
   type = map(object({
     name                                      = string
     address_prefixes                          = list(string)
