@@ -1,6 +1,6 @@
 variable "location" {
   type        = string
-  description = "Azure geographic location for virtual network"
+  description = "Azure geographic location for virtual network."
 }
 
 variable "address_space" {
