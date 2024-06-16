@@ -52,3 +52,9 @@ variable "enabled_for_template_deployment" {
   type        = string
   description = "Specifies if Key Vault is enabled for Resource Manager."
 }
+
+variable "rgnames" {
+  type        = list(string)
+  description = "Names of resource groups."
+  default     = ["aoa_rg", "tfakazurepub-rg"]
+}
