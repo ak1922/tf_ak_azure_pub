@@ -26,3 +26,8 @@ data "azurerm_monitor_action_group" "actiongroup" {
   name                = "aksheridanknox-ag"
   resource_group_name = element(var.rgnames, 0)
 }
+
+# Data source private dns zone.
+data "azurerm_private_dns_zone" "keyvault_dnszone" {
+  name = "privatelink.vaultcore.azure.net"
+}
