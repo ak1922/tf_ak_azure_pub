@@ -10,3 +10,8 @@ output "keyvault_id" {
 output "client_object_id" {
   value = "The object_id ${data.azurerm_client_config.current.object_id} is the client_id and also the person running this terraform module"
 }
+
+output "keyvault_diagsettings_id" {
+  value       = azurerm_monitor_diagnostic_setting.keyvault_diagsetting.id
+  description = "The ID of diagnostic setting for key vault."
+}
