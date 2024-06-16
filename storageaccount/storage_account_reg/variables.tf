@@ -1,7 +1,7 @@
-variable "entity_name" {
-  type        = string
-  description = "Name of front end application or service using storage account."
-}
+# variable "entity_name" {
+#   type        = string
+#   description = "Name of front end application or service using storage account."
+# }
 
 variable "location" {
   type        = string
@@ -19,7 +19,7 @@ variable "account_replication_type" {
 }
 
 variable "enable_https_traffic_only" {
-  type        = string
+  type        = bool
   description = "Allow only https access to this storage account."
 }
 
@@ -39,17 +39,17 @@ variable "ip_rules" {
 }
 
 variable "container_delete_retention_policy" {
-  type        = string
+  type        = number
   description = "Number of days to hold continers after they are deleted"
 }
 
 variable "delete_retention_policy" {
-  type        = string
+  type        = number
   description = "Number of days to hold bolbs after the deleted"
 }
 
 variable "restore_policy" {
-  type        = string
+  type        = number
   description = "Number of days a blob can be restored after its deleted."
 }
 
@@ -66,4 +66,19 @@ variable "change_feed_enabled" {
 variable "last_access_time_enabled" {
   type        = string
   description = "Specifies if last access is enabled."
+}
+
+variable "infrastructure_encryption_enabled" {
+  type        = bool
+  description = "Is infrastructure encryption enabled on storage account"
+}
+
+variable "is_manual_connection" {
+  type        = bool
+  description = "Does the Private Endpoint require Manual Approval from the remote resource owner?"
+}
+
+variable "subresource_names" {
+  type        = list(string)
+  description = "Subresource names which the Private Endpoint is able to connect to endppoint"
 }
