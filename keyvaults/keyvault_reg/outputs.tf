@@ -15,3 +15,13 @@ output "keyvault_diagsettings_id" {
   value       = azurerm_monitor_diagnostic_setting.keyvault_diagsetting.id
   description = "The ID of diagnostic setting for key vault."
 }
+
+output "keyvault_endpoint_id" {
+  value       = azurerm_private_endpoint.keyvault_endpoint.id
+  description = "The ID of Key Vault private endpoint."
+}
+
+output "alert_rules" {
+  value       = toset(values(azurerm_monitor_activity_log_alert.alert_rule).*.id)
+  description = "All IDs for the alert rules."
+}
