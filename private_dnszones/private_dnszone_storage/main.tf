@@ -30,7 +30,7 @@ resource "azurerm_monitor_activity_log_alert" "alert_rule" {
 
   name                = each.value.name
   description         = each.value.description
-  scopes              = [data.azurerm_resource_group.resourcegroup["tfakazurepub-rg"].id]
+  scopes              = [azurerm_private_dns_zone.storage_dnszone.id]
   resource_group_name = element(var.rg_name, 1)
 
   criteria {
