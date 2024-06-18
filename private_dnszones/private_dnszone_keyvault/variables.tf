@@ -23,7 +23,7 @@ variable "activity_log" {
 
   default = {
     delete_record = {
-      name        = "a_record_deleted_storage_dnszone"
+      name        = "a_record_deleted_keyvault_dnszone"
       description = "Alert rule for when an 'A' record is deleted from this dns zone."
 
       criteria = {
@@ -35,7 +35,7 @@ variable "activity_log" {
     }
 
     create_record = {
-      name        = "a_record_created_storage_dnszone"
+      name        = "a_record_created_keyvault_dnszone"
       description = "Alert rule for when an 'A' record is created from this dns zone."
 
       criteria = {

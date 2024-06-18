@@ -17,8 +17,8 @@ variable "activity_log" {
   }))
 
   default = {
-    createA = {
-      name        = "a_record_created_alert"
+    create_record = {
+      name        = "a_record_created_storage_dnszone"
       description = "An alert for when an 'A' record is created in private dns zone"
 
       criteria = {
@@ -27,8 +27,8 @@ variable "activity_log" {
       }
     }
 
-    deleteA = {
-      name        = "a_record_deleted_alert"
+    delete_delete = {
+      name        = "a_record_deleted_storage_dnszone"
       description = "An alert for when an 'A' record is deleted in private dns zone"
 
       criteria = {
