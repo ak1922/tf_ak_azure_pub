@@ -1,1 +1,1 @@
-##### Azure Storage Account Branch.
+##### Azure Storage Accounts.
