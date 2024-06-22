@@ -126,11 +126,11 @@ variable "versioning" {
 variable "change_feed" {
   type        = bool
   description = "(optional) describe your variable"
-  default = true
+  default     = true
 }
 
 variable "last_access" {
   type        = bool
   description = "(optional) describe your variable"
-  default = true
+  default     = true
 }

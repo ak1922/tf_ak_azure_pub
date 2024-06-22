@@ -96,8 +96,8 @@ resource "azurerm_storage_management_policy" "storage_mgmt" {
 
     actions {
       base_blob {
-        tier_to_cool_after_days_since_creation_greater_than        = each.value.base_blob.days_to_cool
-        tier_to_archive_after_days_since_creation_greater_than     = each.value.base_blob.days_to_archive
+        tier_to_cool_after_days_since_creation_greater_than    = each.value.base_blob.days_to_cool
+        tier_to_archive_after_days_since_creation_greater_than = each.value.base_blob.days_to_archive
       }
     }
   }

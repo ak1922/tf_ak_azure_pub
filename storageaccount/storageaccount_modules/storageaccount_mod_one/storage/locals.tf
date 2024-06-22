@@ -17,7 +17,7 @@ locals {
 locals {
   key_args = {
     key_name       = var.preferred_keyname != null ? var.preferred_keyname : join("", [local.common_name, "-keyvaultkey"])
-    key_expiration = var.preferred_key_expiration != null ? var.preferred_key_expiration : timeadd(timestamp(), "8760")
+    key_expiration = var.preferred_key_expiration != null ? var.preferred_key_expiration : timeadd(timestamp(), "8760h")
     key_opts       = ["encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey"]
   }
 }
@@ -36,11 +36,8 @@ locals {
 # Locals block for blobs
 locals {
   blob_args = {
-    container_delete = var.preferred_container_delete != null ? var.preferred_container_delete : 90
-    retention_policy = var.preferred_delete_retention != null ? var.preferred_delete_retention : 90
-    restore_policy   = var.preferred_restore_policy != null ? var.preferred_restore_policy : 60
-    versioning       = var.enable_https_traffic_only == true && var.preferred_container_delete != null ? true : false
-    change_feed      = var.enable_https_traffic_only == true && var.preferred_container_delete != null ? true : false
-    last_access      = var.enable_https_traffic_only == true && var.preferred_container_delete != null ? true : false
+    container_delete = var.preferred_container_delete == null ? 90 : var.preferred_container_delete
+    retention_policy = var.preferred_delete_retention == null ? 90 : var.preferred_delete_retention
+    restore_policy   = var.preferred_restore_policy == null ? 60 : var.preferred_restore_policy
   }
 }
