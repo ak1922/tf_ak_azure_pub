@@ -14,3 +14,10 @@ data "azurerm_virtual_network" "virtual_network" {
   name                = "tfakazurepub-vnet"
   resource_group_name = data.azurerm_resource_group.rg.name
 }
+
+# Data source private subnet.
+data "azurerm_subnet" "private_subnet" {
+  name                 = "tfakazurepub-vnet-pri-sub"
+  resource_group_name  = data.azurerm_resource_group.rg.name
+  virtual_network_name = data.azurerm_virtual_network.virtual_network.name
+}
