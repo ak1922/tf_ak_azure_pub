@@ -29,7 +29,7 @@ locals {
     account_tier     = local.module_tags.environment == "dev" ? "Standard" : "Premium"
     account_rep_type = local.module_tags.environment == "dev" ? "LRS" : "GRS"
     infra_enabled    = local.module_tags.environment == "dev" ? false : true
-    default_action = var.ip_rules != [] && var.bypass != [] ? "Deny" : "Allow"
+    default_action   = var.ip_rules != [] && var.bypass != [] ? "Deny" : "Allow"
   }
 }
 
