@@ -67,12 +67,16 @@ resource "azurerm_storage_account" "storage" {
       days = local.blob_args.restore_policy
     }
 
-    versioning_enabled       = local.blob_args.versioning
-    change_feed_enabled      = local.blob_args.change_feed
-    last_access_time_enabled = local.blob_args.last_access
+    versioning_enabled       = var.versioning
+    change_feed_enabled      = var.change_feed
+    last_access_time_enabled = var.last_access
   }
 
   tags = local.module_tags
+
+  depends_on = [
+    azurerm_key_vault_key.keyvaylt_key
+  ]
 }
 
 # Storage management policy.
@@ -94,8 +98,11 @@ resource "azurerm_storage_management_policy" "storage_mgmt" {
       base_blob {
         tier_to_cool_after_days_since_creation_greater_than        = each.value.base_blob.days_to_cool
         tier_to_archive_after_days_since_creation_greater_than     = each.value.base_blob.days_to_archive
-        tier_to_archive_after_days_since_modification_greater_than = each.value.base_blob.days_since_modification
       }
     }
   }
+
+  depends_on = [
+    azurerm_storage_account.storage
+  ]
 }
