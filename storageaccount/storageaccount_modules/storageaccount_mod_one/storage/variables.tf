@@ -60,7 +60,6 @@ variable "preferred_delete_retention" {
 variable "preferred_restore_policy" {
   type        = number
   description = "Specifies the number of days that the blob can be restored, between 1 and 365 days."
-  nullable    = true
 }
 
 variable "identity_ids" {
@@ -116,4 +115,22 @@ variable "enable_https_traffic_only" {
   type        = bool
   description = "Boolean flag which forces HTTPS traffic."
   default     = true
+}
+
+variable "versioning" {
+  type        = bool
+  description = "(optional) describe your variable"
+  default     = true
+}
+
+variable "change_feed" {
+  type        = bool
+  description = "(optional) describe your variable"
+  default = true
+}
+
+variable "last_access" {
+  type        = bool
+  description = "(optional) describe your variable"
+  default = true
 }
