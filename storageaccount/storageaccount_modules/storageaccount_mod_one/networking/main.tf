@@ -27,3 +27,29 @@ resource "azurerm_private_dns_zone_virtual_network_link" "dnszone_vnet" {
     ]
   }
 }
+
+# Private endpoint.
+resource "azurerm_private_endpoint" "storage_endpoint" {
+  name                = local.endpoint_args.endpoint_name
+  resource_group_name = data.azurerm_resource_group.rg.name
+  location            = data.azurerm_resource_group.rg.location
+  subnet_id           = data.azurerm_subnet.private_subnet.id
+
+  private_dns_zone_group {
+    name                 = local.endpoint_args.group_name
+    private_dns_zone_ids = [azurerm_private_dns_zone.private_dnszone.0.id]
+  }
+
+  private_service_connection {
+    name                           = local.endpoint_args.private_name
+    is_manual_connection           = var.is_manual_connection
+    subresource_names              = var.subresource_names
+    private_connection_resource_id = var.connect_resource
+  }
+
+  tags = local.module_tags
+
+  depends_on = [
+    azurerm_private_dns_zone_virtual_network_link.dnszone_vnet
+  ]
+}
