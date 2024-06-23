@@ -9,16 +9,16 @@ variable "address_space" {
 }
 
 variable "subnets" {
-  description = "Public and private subnets for virtual network"
+  description = "(optional) describe your variable"
   type = map(object({
-    name                                      = string
-    address_prefixes                          = list(string)
-    service_endpoints                         = optional(list(string))
-    private_endpoint_network_policies_enabled = optional(bool)
+    name              = string
+    address_prefixes  = list(string)
+    service_endpoints = optional(list(string))
 
     delegation = optional(object({
       name = string
       service_delegation = object({
+        name    = string
         actions = list(string)
       })
     }))
@@ -31,10 +31,9 @@ variable "subnets" {
     }
 
     subnet2 = {
-      name                                      = "tfakazurepub-vnet-pri-sub"
-      address_prefixes                          = ["192.168.0.128/25"]
-      service_endpoints                         = ["Microsoft.Storage", "Microsoft.Keyvault"]
-      private_endpoint_network_policies_enabled = true
+      name              = "tfakazurepub-vnet-pri-sub"
+      address_prefixes  = ["192.168.0.128/25"]
+      service_endpoints = ["Microsoft.Storage", "Microsoft.Keyvault"]
     }
 
     subnet3 = {
