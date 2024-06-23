@@ -1,2 +1,2 @@
 ###### Azure Linux Virtual Machine
-This is a one folder module that create an Azure Liuux virtual machine.
+A one folder module that creates an Azure Liuux virtual machine.
