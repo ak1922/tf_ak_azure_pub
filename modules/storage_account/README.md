@@ -1,4 +1,4 @@
-###### Storage Account
-This is a nested module that creates a storage account in a given environment.
-There are there folders for resources identity for user identity, networking for
-private endpoint and storage folder for the storage account itself.
+Azure storage account module.\
+This module creates an Azure storage account with a number of accompanying resources. To adapt this module for your purpose,
+change the values in the providers.tf file to those of your preference. 
+

@@ -24,12 +24,12 @@ resource "azurerm_role_assignment" "user_identity_role" {
 
   lifecycle {
     precondition {
-      condition = data.azurerm_key_vault.keyvault.enable_rbac_authorization == true
+      condition     = data.azurerm_key_vault.keyvault.enable_rbac_authorization == true
       error_message = "RBAC has to be enabled on Key Vault to successfuly compplete this role assignment."
     }
 
     replace_triggered_by = [
-        azurerm_user_assigned_identity.user_identity
-     ]
+      azurerm_user_assigned_identity.user_identity
+    ]
   }
 }
