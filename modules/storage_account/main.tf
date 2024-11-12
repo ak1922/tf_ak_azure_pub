@@ -1,21 +1,8 @@
-# Providers and versions.
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "3.91.0"
-    }
+resource "azurerm_resource_group" "resource_group" {
+  count = var.existing_rg == null ? 1 : 0
 
-    random = {
-      source  = "hashicorp/random"
-      version = "3.6.2"
-    }
-  }
-}
-
-provider "azurerm" {
-  features {}
-  skip_provider_registration = "true"
+  location = ""
+  name     = ""
 }
 
 module "identity" {
