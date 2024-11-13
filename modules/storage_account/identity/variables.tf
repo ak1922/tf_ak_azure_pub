@@ -1,8 +1,3 @@
-variable "app_name" {
-  type        = string
-  description = "Name of sample application."
-}
-
 variable "location" {
   type        = string
   description = "Azure geographic location where user identity exists."
@@ -18,7 +13,22 @@ variable "role" {
   }
 }
 
-variable "keyvault_name" {
-  type        = string
-  description = "Name of Key Vault needed to create customer managed key"
+variable "identity_name" {
+  type = string
+  description = "Name of user assigned identity."
+}
+
+variable "project_tags" {
+  type = map(string)
+  description = "Project tags for resources."
+}
+
+variable "rg_name" {
+  type = string
+  description = "Name of resource group."
+}
+
+variable "keyvault_id" {
+  type = string
+  description = "Key Vault ID for role assignment."
 }

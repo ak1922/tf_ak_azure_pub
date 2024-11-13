@@ -2,22 +2,22 @@ output "user_identity_id" {
   value = module.identity.user_identity_id
 }
 
-output "user_identity_role_id" {
-  value = module.identity.user_identity_role_id
+output "service_subnet_id" {
+  value = module.network.service_subnet_id
 }
 
-output "private_dnszone_name" {
-  value = module.networking.private_dnszone_name
+output "network_name" {
+  value = module.network.vnet_name
 }
 
-output "private_dnszone_id" {
-  value = module.networking.private_dnszone_id
+output "network_id" {
+  value = module.network.vnet_id
 }
 
-output "storage_id" {
+output "vault_id" {
+  value = module.keyvault.vault_id
+}
+
+output "storage_account_id" {
   value = module.storage.storage_id
-}
-
-output "storage_endpoint_id" {
-  value = module.networking.storage_endpoint_id
 }
