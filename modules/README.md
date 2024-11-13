@@ -1,2 +1,2 @@
-Azure Terraform modules\
+Azure Terraform modules
 - storage account
