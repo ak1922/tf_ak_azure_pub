@@ -1,11 +1,9 @@
-output "keyvaylt_key_name" {
-  value = azurerm_key_vault_key.keyvaylt_key.name
-}
-
-output "keyvaylt_key_id" {
-  value = azurerm_key_vault_key.keyvaylt_key.id
-}
-
 output "storage_id" {
-  value = azurerm_storage_account.storage.id
+  value       = azurerm_storage_account.storage.id
+  description = "Storage account ID."
+}
+
+output "storage_endpoint_id" {
+  value       = azurerm_private_endpoint.storage_endpoint.id
+  description = "Storage account private endpoint ID."
 }
