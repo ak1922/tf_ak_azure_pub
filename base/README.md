@@ -1,1 +1,0 @@
-##### Base resources and Co.
