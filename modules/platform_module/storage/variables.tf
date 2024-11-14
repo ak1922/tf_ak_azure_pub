@@ -1,11 +1,7 @@
-variable "keyvault_name" {
-  type        = string
-  description = "Name of Key Vault needed to create sustomer managed key"
-}
-
 variable "preferred_keyname" {
   type        = string
   description = "Custom name for Key Vault key for encryption."
+  default     = null
 }
 
 variable "preferred_key_expiration" {
@@ -24,17 +20,6 @@ variable "key_size" {
   description = "Specifies the Size of the RSA key to create in bytes. For example, 1024 or 2048."
 }
 
-variable "app_name" {
-  type        = string
-  description = "Name of module's application."
-}
-
-variable "shared_access_key_enabled" {
-  type        = bool
-  description = "Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key."
-  default     = null
-}
-
 variable "ip_rules" {
   description = "A list of IPv4s allowed through firewall"
   type        = list(string)
@@ -50,16 +35,19 @@ variable "bypass" {
 variable "preferred_container_delete" {
   type        = number
   description = "Specifies the number of days that the container should be retained, between 1 and 365 days"
+  default     = null
 }
 
 variable "preferred_delete_retention" {
   type        = number
   description = " Specifies the number of days that the blob should be retained, between 1 and 365"
+  default     = null
 }
 
 variable "preferred_restore_policy" {
   type        = number
   description = "Specifies the number of days that the blob can be restored, between 1 and 365 days."
+  default     = null
 }
 
 variable "identity_ids" {
@@ -83,54 +71,90 @@ variable "rotation_policy" {
   default = {}
 }
 
-variable "lifecycle_rules" {
-  description = "Determines life cycle in storage account."
+variable "lifecycle_rule" {
+  description = "Network security group rules."
   type = map(object({
-    name         = string
-    prefix_match = list(string)
-    blob_types   = list(string)
-    base_blob = object({
-      days_to_archive         = optional(number)
-      days_since_modification = optional(number)
-      days_to_cool            = number
-    })
+    name   = string
+    prefix = list(string)
+    type   = list(string)
+    base_blob = optional(object({
+      tier_to_cool    = optional(number)
+      tier_to_archive = optional(number)
+      delete_after    = number
+    }))
+    version = optional(object({
+      tier_to_archive = number
+      tier_to_cool    = number
+      delete_after    = number
+    }))
   }))
 
   default = {
-    rule = {
-      name         = "storage_rules"
-      prefix_match = ["Default/*"]
-      blob_types   = ["blockBlob"]
-
+    rule1 = {
+      name   = "con1_rule"
+      prefix = ["container1/*"]
+      type   = ["blockBlob"]
       base_blob = {
-        days_to_archive         = 60
-        days_since_modification = 90
-        days_to_cool            = 30
+        tier_to_archive = 14
+        tier_to_cool    = 60
+        delete_after    = 90
+      }
+      version = {
+        tier_to_archive = 14
+        tier_to_cool    = 90
+        delete_after    = 7
       }
     }
   }
 }
 
-variable "enable_https_traffic_only" {
+variable "https_traffic" {
   type        = bool
   description = "Boolean flag which forces HTTPS traffic."
   default     = true
 }
 
-variable "versioning" {
-  type        = bool
-  description = "(optional) describe your variable"
-  default     = true
+variable "subnet_id" {
+  type        = string
+  description = "Subnet ID for service subnet."
 }
 
-variable "change_feed" {
-  type        = bool
-  description = "(optional) describe your variable"
-  default     = true
+variable "rg_name" {
+  type        = string
+  description = "Name of resource group."
 }
 
-variable "last_access" {
-  type        = bool
-  description = "(optional) describe your variable"
-  default     = true
+variable "project_tags" {
+  type        = map(string)
+  description = "Project tags for resources."
+}
+
+variable "common_name" {
+  type        = string
+  description = "Common name for all resources."
+}
+
+variable "vault_id" {
+  type        = string
+  description = "Key vault ID for customer managed key."
+}
+
+variable "location" {
+  type        = string
+  description = "Name of Azure location."
+}
+
+variable "st_zone_name" {
+  type        = string
+  description = "Name of private dns zone for storage account"
+}
+
+variable "st_link_name" {
+  type        = string
+  description = "Name of storage dns zone vnet link."
+}
+
+variable "network_id" {
+  type        = string
+  description = "Virtual network (vnet) ID."
 }
