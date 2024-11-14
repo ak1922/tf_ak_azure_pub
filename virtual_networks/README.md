@@ -1,2 +1,1 @@
-##### Azure Virtual Network
-Azure network resources including virtual network and subnets.
+Azure virtual network and associated resources.
