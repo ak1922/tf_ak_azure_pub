@@ -1,0 +1,11 @@
+sku_name            = "standard"
+soft_delete         = 7
+purge_protect       = true
+rbac_authorization  = true
+disk_encryption     = true
+template_deployment = true
+enabled_deployment  = true
+ip_rules            = ["76.100.143.150"]
+default_action      = "Deny"
+bypass              = "AzureServices"
+client_role         = "Key Vault Administrator"

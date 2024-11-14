@@ -1,36 +1,31 @@
 variable "sku_name" {
   type        = string
-  description = "Name of Key Vault sku."
+  description = "Key vault sku."
 }
 
-variable "location" {
-  type        = string
-  description = "Teh Azure region where Key Vault exists"
-}
-
-variable "soft_delete_retention_days" {
+variable "soft_delete" {
   type        = number
   description = "Number of days to hold items from this Vault when its deleted"
 }
 
-variable "purge_protection_enabled" {
+variable "purge_protect" {
   type        = bool
-  description = "Is purge protection enabled on Key Vault."
+  description = "Is purge protection enabled on Key Vault?"
 }
 
-variable "enabled_for_disk_encryption" {
+variable "disk_encryption" {
   type        = bool
-  description = "Is Key Vault enabled for disk encryption"
+  description = "Is Key Vault enabled for disk encryption?"
 }
 
-variable "enable_rbac_authorization" {
+variable "rbac_authorization" {
   type        = bool
-  description = "Is Key Vault enabled for RBAC"
+  description = "Is Key Vault enabled for RBAC?"
 }
 
-variable "enabled_for_deployment" {
+variable "enabled_deployment" {
   type        = bool
-  description = "Is Key Vault enabled for deployment."
+  description = "Is Key Vault enabled for deployment?"
 }
 
 variable "bypass" {
@@ -44,77 +39,16 @@ variable "default_action" {
 }
 
 variable "ip_rules" {
-  description = "A list of IPs allowd access through firewall."
+  description = "A list of IPs allowed access through firewall."
   type        = list(string)
 }
 
-variable "enabled_for_template_deployment" {
+variable "template_deployment" {
   type        = string
   description = "Specifies if Key Vault is enabled for Resource Manager."
 }
 
-variable "rgnames" {
-  type        = list(string)
-  description = "Names of resource groups."
-  default     = ["aoa_rg", "tfakazurepub-rg"]
-}
-
-variable "is_manual_connection" {
+variable "client_role" {
   type        = string
-  description = "Whether approval is required or not."
-}
-
-variable "subresource_names" {
-  type        = list(string)
-  description = "Azure resources allowed to connec to private endpoint."
-}
-
-variable "activity_log" {
-  description = "Alert rules for Key Vault"
-  type = map(object({
-    name        = string
-    description = optional(string)
-
-    criteria = object({
-      operation_name = string
-      statuses       = optional(list(string))
-    })
-  }))
-
-  default = {
-    createKey = {
-      name        = "keyvault_key_created"
-      description = "Alert for for when a Key Vault key is created in this Key Vault."
-
-      criteria = {
-        operation_name = "Microsoft.KeyVault/vaults/keys/create/action"
-        statuses       = ["Succeeded", "Failed"]
-      }
-    }
-
-    deleteKey = {
-      name        = "keyvault_key_deleted"
-      description = "Alert for for when a Key Vault key is deleted from this Key Vault."
-
-      criteria = {
-        operation_name = "Microsoft.KeyVault/vaults/keys/delete"
-        statuses       = ["Succeeded", "Failed"]
-      }
-    }
-
-    deleteKeyVault = {
-      name        = "keyvault_deleted"
-      description = "Alert rule for when this Key Vault is deleted"
-
-      criteria = {
-        operation_name = "Microsoft.KeyVault/vaults/delete"
-        statuses       = ["Succeeded", "Failed"]
-      }
-    }
-  }
-}
-
-variable "category" {
-  type        = string
-  description = "The category of the operation."
+  description = "Role for Key vault administration."
 }
