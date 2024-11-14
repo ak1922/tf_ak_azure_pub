@@ -5,8 +5,8 @@ this module for your purpose. Changing the "department" and "environment" variab
 You will also need a virtual network CIDR and three addresses for subnets. These changes can be added in the ```main.tf``` file before you
 run ```terraform plan``` or ```terraform apply```. The Azure resources provisioned are listed below by module and order of creation/apply.
 
-If you have a resource group in Azure already provisioned, and you'd rather use it, replace the ```null``` value in ```existing_rg``` variable 
-with your resource group name.
+If you have a resource group in Azure already provisioned, and you'd rather use it, replace the ```null``` value in ```existing_rg``` in
+```variable.tf``` off the root with your resource group name.
 
 **Terraform Resources**\
 ```azurerm_resource_group``` if needed
