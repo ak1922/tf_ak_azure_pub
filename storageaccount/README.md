@@ -1,1 +1,1 @@
-##### Azure Storage Accounts.
+Azure storage accounts and associated resources.
