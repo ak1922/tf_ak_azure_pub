@@ -1,0 +1,12 @@
+administrator_login   = "psqldb_admin"
+auto_grow_enabled     = true
+backup_retention_days = 7
+location = "eastus2"
+day_of_week           = 0
+start_hour            = 0
+start_minute          = 30
+server_version        = "16"
+sku_name              = "B_Standard_B1ms"
+storage_mb            = 32768
+zone                  = "1"
+public_access         = true
