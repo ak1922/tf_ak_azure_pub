@@ -5,7 +5,6 @@ locals {
     department  = var.department
     environment = var.environment
   }
-
   common_name = lower(join("", [local.tags.environment, substr(local.tags.department, 0, 4)]))
 }
 
