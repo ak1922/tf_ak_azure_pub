@@ -122,31 +122,35 @@ resource "azurerm_private_endpoint" "storage_endpoint" {
   depends_on = [azurerm_storage_account.storage]
 }
 
-# # Storage management policy.
-# resource "azurerm_storage_management_policy" "storage_mgmt" {
-#   for_each           = var.lifecycle_rules
-#   storage_account_id = azurerm_storage_account.storage.id
-#
-#   rule {
-#     name = each.value.name
-#
-#     filters {
-#       prefix_match = each.value.prefix_match
-#       blob_types   = each.value.blob_types
-#     }
-#
-#     enabled = true
-#
-#     actions {
-#       base_blob {
-#         tier_to_cool_after_days_since_creation_greater_than    = each.value.base_blob.days_to_cool
-#         tier_to_archive_after_days_since_creation_greater_than = each.value.base_blob.days_to_archive
-#         delete_after_days_since_modification_greater_than      = each.value.base_blob.delete_days
-#       }
-#     }
-#   }
-#
-#   depends_on = [
-#     azurerm_private_endpoint.storage_endpoint
-#   ]
-# }
+resource "azurerm_storage_management_policy" "storage_mgmt" {
+  storage_account_id = azurerm_storage_account.storage.id
+
+  dynamic "rule" {
+    for_each = var.lifecycle_rule
+
+    content {
+      name    = rule.value.name
+      enabled = true
+      filters {
+        prefix_match = rule.value.prefix
+        blob_types   = rule.value.type
+      }
+
+      actions {
+        base_blob {
+          tier_to_archive_after_days_since_modification_greater_than = rule.value.base_blob.tier_to_archive
+          tier_to_cool_after_days_since_modification_greater_than    = rule.value.base_blob.tier_to_cool
+          delete_after_days_since_modification_greater_than          = rule.value.base_blob.delete_after
+        }
+
+        version {
+          change_tier_to_archive_after_days_since_creation = rule.value.version.tier_to_archive
+          change_tier_to_cool_after_days_since_creation    = rule.value.version.tier_to_cool
+          delete_after_days_since_creation                 = rule.value.version.delete_after
+        }
+      }
+    }
+  }
+
+  depends_on = [azurerm_private_endpoint.storage_endpoint]
+}

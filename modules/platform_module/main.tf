@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "group" {
   tags = merge({ Name = "${local.common_name}_rg" }, local.tags)
 }
 
-# Virtual network child module.
+# Virtual network module.
 module "network" {
   source     = "./network"
   depends_on = [azurerm_resource_group.group]
@@ -36,7 +36,7 @@ module "network" {
   }
 }
 
-# Key vault child module.
+# Key vault module.
 module "keyvault" {
   source = "./keyvault"
   depends_on = [
@@ -51,15 +51,15 @@ module "keyvault" {
   location     = "eastus"
   network_id   = module.network.vnet_id
   project_tags = local.tags
-  ip_rules = ["76.100.143.150"]
+  ip_rules     = ["76.100.143.150"]
   rg_name      = local.recource_group_name
   subnet_id    = module.network.service_subnet_id
   tenant_id    = data.azurerm_client_config.current.tenant_id
   principal_id = data.azurerm_client_config.current.object_id
-  bypass = "AzureServices"
+  bypass       = "AzureServices"
 }
 
-# User identity child module.
+# User identity module.
 module "identity" {
   source = "./identity"
   depends_on = [
@@ -76,7 +76,7 @@ module "identity" {
   rg_name       = local.recource_group_name
 }
 
-# Storage account child module.
+# Storage account module.
 module "storage" {
   source = "./storage"
   depends_on = [
@@ -90,11 +90,6 @@ module "storage" {
   identity_ids = [module.identity.user_identity_id]
   key_size     = 2048
   key_type     = "RSA"
-  # preferred_container_delete = null
-  # preferred_delete_retention = null
-  # preferred_key_expiration   = null
-  # preferred_keyname          = null
-  # preferred_restore_policy   = null
   common_name  = local.common_name
   location     = "eastus"
   project_tags = local.tags

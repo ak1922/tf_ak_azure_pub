@@ -71,33 +71,42 @@ variable "rotation_policy" {
   default = {}
 }
 
-# variable "lifecycle_rules" {
-#   description = "Determines life cycle in storage account."
-#   type = map(object({
-#     name         = string
-#     prefix_match = list(string)
-#     blob_types   = list(string)
-#     base_blob = object({
-#       days_to_archive         = optional(number)
-#       days_since_modification = optional(number)
-#       days_to_cool            = number
-#     })
-#   }))
-#
-#   default = {
-#     rule = {
-#       name         = "storage_rules"
-#       prefix_match = ["Default/*"]
-#       blob_types   = ["blockBlob"]
-#
-#       base_blob = {
-#         days_to_archive = 60
-#         days_to_cool    = 30
-#         delete_days     = 90
-#       }
-#     }
-#   }
-# }
+variable "lifecycle_rule" {
+  description = "Network security group rules."
+  type = map(object({
+    name   = string
+    prefix = list(string)
+    type   = list(string)
+    base_blob = optional(object({
+      tier_to_cool    = optional(number)
+      tier_to_archive = optional(number)
+      delete_after    = number
+    }))
+    version = optional(object({
+      tier_to_archive = number
+      tier_to_cool    = number
+      delete_after    = number
+    }))
+  }))
+
+  default = {
+    rule1 = {
+      name   = "con1_rule"
+      prefix = ["container1/*"]
+      type   = ["blockBlob"]
+      base_blob = {
+        tier_to_archive = 14
+        tier_to_cool    = 60
+        delete_after    = 90
+      }
+      version = {
+        tier_to_archive = 14
+        tier_to_cool    = 90
+        delete_after    = 7
+      }
+    }
+  }
+}
 
 variable "https_traffic" {
   type        = bool
