@@ -1,1 +1,1 @@
-Azure virtual network and associated resources.
+Azure virtual network and associated resources
