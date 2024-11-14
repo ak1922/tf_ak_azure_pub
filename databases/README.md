@@ -1,2 +1,1 @@
-###### Azure Databases.
-This folder contains Azure databases.
+Azure databases and related resources.
