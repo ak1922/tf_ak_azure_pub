@@ -1,13 +1,3 @@
-# variable "entity_name" {
-#   type        = string
-#   description = "Name of front end application or service using storage account."
-# }
-
-variable "location" {
-  type        = string
-  description = "Azure geographic location/region where resource exists."
-}
-
 variable "account_tier" {
   type        = string
   description = "The account tier of the storage account."
@@ -38,12 +28,12 @@ variable "ip_rules" {
   type        = list(string)
 }
 
-variable "container_delete_retention_policy" {
+variable "container_delete" {
   type        = number
-  description = "Number of days to hold continers after they are deleted"
+  description = "Number of days to hold containers after they are deleted"
 }
 
-variable "delete_retention_policy" {
+variable "delete_retention" {
   type        = number
   description = "Number of days to hold bolbs after the deleted"
 }
@@ -51,34 +41,4 @@ variable "delete_retention_policy" {
 variable "restore_policy" {
   type        = number
   description = "Number of days a blob can be restored after its deleted."
-}
-
-variable "versioning_enabled" {
-  description = "Specifies if versioning is enabled ob blobs"
-  type        = bool
-}
-
-variable "change_feed_enabled" {
-  description = "Specifies if change feed is enabled"
-  type        = bool
-}
-
-variable "last_access_time_enabled" {
-  type        = string
-  description = "Specifies if last access is enabled."
-}
-
-variable "infrastructure_encryption_enabled" {
-  type        = bool
-  description = "Is infrastructure encryption enabled on storage account"
-}
-
-variable "is_manual_connection" {
-  type        = bool
-  description = "Does the Private Endpoint require Manual Approval from the remote resource owner?"
-}
-
-variable "subresource_names" {
-  type        = list(string)
-  description = "Subresource names which the Private Endpoint is able to connect to endppoint"
 }
