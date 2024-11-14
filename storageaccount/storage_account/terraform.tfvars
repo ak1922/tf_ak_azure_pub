@@ -1,0 +1,9 @@
+account_tier              = "Standard"
+account_replication_type  = "LRS"
+container_delete          = 90
+restore_policy            = 20
+delete_retention          = 60
+enable_https_traffic_only = true
+default_action            = "Deny"
+ip_rules                  = ["76.100.143.150"]
+bypass                    = ["Logging", "Metrics", "AzureServices"]
